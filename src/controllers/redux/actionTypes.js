@@ -1,0 +1,1 @@
+export const AUTH_CREATE_USER = 'AUTH_CREATE_USER';

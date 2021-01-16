@@ -6,3 +6,7 @@ export function AuthLayoutProps() {
     ]
   }
 }
+
+export function useSignUpProps() {
+  
+}

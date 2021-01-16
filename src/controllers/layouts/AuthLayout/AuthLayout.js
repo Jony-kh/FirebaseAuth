@@ -1,5 +1,5 @@
 import React from 'react'
-import MainNav from '../../components/molecules/MainNav'
+import MainNav from '../../../components/molecules/MainNav'
 import { AuthLayoutProps } from '../../hooks/auth/auth'
 
 export default function AuthLayout({ children }) {

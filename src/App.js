@@ -1,7 +1,6 @@
 import React from 'react'
-import Routes from './routes'
+import Routes from './controllers/routes'
 import './App.scss'
-
 
 function App() {
   return (
