@@ -1,53 +1,78 @@
-import React, { useState } from 'react'
-import { createUser } from '../../redux/actions/authActions'
-import { useDispatch } from 'react-redux';
+import React from 'react'
+import { useSignUpProps } from '../../hooks/auth/auth';
+import Field from '../../../components/atoms/Field'
 
 export default function SignUp() {
-  const dispatch = useDispatch()
-
-  const [user, setUser] = useState({
-    name: '', age: '', login: '', password: '', password2: ''
-  })
+  const { fields, updateField, createUser, validationErrors } = useSignUpProps();
 
   const onInputChange = ({ target }) => {
-    setUser({
-      ...user,
-      [target.name]: target.value
-    })
+    updateField(target.name, target.value);
   }
 
   const onSubmit = (e) => {
     e.preventDefault()
-    if (user.password !== user.password2) return alert("Пароли не совпадают")
-    setUser({ name: '', age: '', login: '', password: '', password2: '' })
-
-    dispatch(createUser(user))
+    createUser()
   }
 
   return (
     <div>
       <h1>SING UP</h1>
       <form onSubmit={onSubmit}>
-        <div>
-          <label htmlFor="name">Name</label>
-          <input id="name" required name="name" type="text" value={user.name} onChange={onInputChange} />
-        </div>
-        <div>
-          <label htmlFor="age">Age</label>
-          <input id="age" required name="age" type="number" value={user.age} onChange={onInputChange} />
-        </div>
-        <div>
-          <label htmlFor="login">Login</label>
-          <input id="login" required name="login" type="text" value={user.login} onChange={onInputChange} />
-        </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input id="password" required name="password" type="password" value={user.password} onChange={onInputChange} />
-        </div>
-        <div>
-          <label htmlFor="password2">Repeat Password</label>
-          <input id="password2" required name="password2" type="password" value={user.password2} onChange={onInputChange} />
-        </div>
+        <Field
+          required
+          id="name"
+          name="name"
+          type="text"
+          label="Name"
+          value={fields.name}
+          onChange={onInputChange}
+          validationError={validationErrors?.name}
+          component={props => <input {...props} />}
+        />
+        <Field
+          required
+          id="age"
+          name="age"
+          type="number"
+          label="Age"
+          value={fields.age}
+          onChange={onInputChange}
+          validationError={validationErrors?.age}
+          component={props => <input {...props} />}
+        />
+        <Field
+          required
+          id="login"
+          name="login"
+          type="text"
+          label="Login"
+          value={fields.login}
+          onChange={onInputChange}
+          validationError={validationErrors?.login}
+          component={props => <input {...props} />}
+        />
+        <Field
+          required
+          id="password"
+          name="password"
+          type="text"
+          label="Password"
+          value={fields.password}
+          onChange={onInputChange}
+          validationError={validationErrors?.password}
+          component={props => <input {...props} />}
+        />
+        <Field
+          required
+          id="password2"
+          name="password2"
+          type="text"
+          label="Repeat Password"
+          value={fields.password2}
+          onChange={onInputChange}
+          validationError={validationErrors?.password2}
+          component={props => <input {...props} />}
+        />
         <button type="submit">Create user</button>
       </form>
     </div>
