@@ -1,6 +1,7 @@
 import React from 'react'
 import { useSignUpProps } from '../../hooks/auth/auth';
 import Field from '../../../components/atoms/Field'
+import { firebaseAuth } from '../../firebase';
 
 export default function SignUp() {
   const { fields, updateField, createUser, validationErrors } = useSignUpProps();
@@ -9,9 +10,10 @@ export default function SignUp() {
     updateField(target.name, target.value);
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    createUser()
+    const result = await firebaseAuth.createUserWithEmailAndPassword(fields.login, fields.password)
+    // createUser()
   }
 
   return (

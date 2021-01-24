@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSignInProps } from '../../hooks/auth/auth';
 import Field from '../../../components/atoms/Field'
-
+import { firebaseAuth } from '../../firebase';
 
 export default function SignIn() {
   const { fields, updateField, checkUser, validationErrors } = useSignInProps();
@@ -10,9 +10,9 @@ export default function SignIn() {
     updateField(target.name, target.value);
   }
 
-  const onSubmit = (e) => {
+  const onSubmit = async (e) => {
     e.preventDefault()
-    checkUser()
+    const result = await firebaseAuth.signInWithEmailAndPassword(fields.login, fields.password)
   }
 
   const errorMessage = validationErrors.general ? <p>{validationErrors.general}</p> : ""
