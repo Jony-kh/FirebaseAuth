@@ -5,7 +5,12 @@ export const initialSignUpFormValues = {
   password: '',
   password2: ''
 }
+export const initialSignInFormValues = {
+  login: '',
+  password: ''
+}
 
-export const initialSignUpValidationErrors = {
-  signup: {}
+export const initialAuthValidationErrors = {
+  signup: {},
+  signin: {}
 }

@@ -55,7 +55,7 @@ export default function SignUp() {
           required
           id="password"
           name="password"
-          type="text"
+          type="password"
           label="Password"
           value={fields.password}
           onChange={onInputChange}
@@ -66,7 +66,7 @@ export default function SignUp() {
           required
           id="password2"
           name="password2"
-          type="text"
+          type="password"
           label="Repeat Password"
           value={fields.password2}
           onChange={onInputChange}

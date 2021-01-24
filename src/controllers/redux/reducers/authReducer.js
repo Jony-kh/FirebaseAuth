@@ -1,18 +1,22 @@
-import { initialSignUpFormValues, initialSignUpValidationErrors } from "../../constants/auth/signup"
+import { initialSignUpFormValues, initialSignInFormValues, initialAuthValidationErrors } from "../../constants/auth/signup"
 import {
   AUTH_CREATE_USER,
   AUTH_UPDATE_SIGNUP_FORM,
   AUTH_RESET_SIGNUP_FORM,
-  AUTH_SET_FORM_VALIDATION_ERRORS
+  AUTH_SET_FORM_VALIDATION_ERRORS,
+  AUTH_UPDATE_SIGNIN_FORM,
+  AUTH_SET_CURRENT_USER
 } from "../actionTypes"
 
 const initialState = {
+  currentUser: {},
   users: [],
   lastUserID: 0,
   forms: {
-    signup: initialSignUpFormValues
+    signup: initialSignUpFormValues,
+    signin: initialSignInFormValues
   },
-  validationErrors: initialSignUpValidationErrors
+  validationErrors: initialAuthValidationErrors
 }
 
 export default function authReducer(state = initialState, action) {
@@ -45,6 +49,15 @@ export default function authReducer(state = initialState, action) {
           signup: initialSignUpFormValues
         }
       }
+      
+      case AUTH_UPDATE_SIGNIN_FORM:
+        return {
+          ...state,
+          forms: {
+            ...state.forms,
+            signin: action.payload.newForm
+          }
+        }
     case AUTH_SET_FORM_VALIDATION_ERRORS:
       return {
         ...state,
@@ -53,6 +66,11 @@ export default function authReducer(state = initialState, action) {
           ...action.payload.newValidationErrorsState
         }
       }
+      case AUTH_SET_CURRENT_USER:
+        return {
+          ...state,
+          currentUser: action.payload.user
+        }
     default:
       return state
   }
